@@ -1,4 +1,4 @@
-FROM php:alpine
+FROM php:alpine3.11
 
 RUN apk add --no-cache mariadb mariadb-client tzdata && \
     docker-php-ext-install mysqli && \
@@ -21,7 +21,8 @@ ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 ADD run.sh /usr/local/bin/
 CMD ["/usr/local/bin/run.sh"]
 
-RUN rm -rf /var/www/html/*
-ADD phpmyadmin /var/www/html/
+RUN rm -rf /var/www/html
+ADD phpMyAdmin-4.9.5-all-languages.tar.gz /var/www/
+RUN ln -s /var/www/phpMyAdmin-4.9.5-all-languages /var/www/html
 
 EXPOSE 3306 80
