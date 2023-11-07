@@ -24,5 +24,6 @@ CMD ["/usr/local/bin/run.sh"]
 RUN rm -rf /var/www/html
 ADD phpMyAdmin-4.9.5-all-languages.tar.gz /var/www/
 RUN ln -s /var/www/phpMyAdmin-4.9.5-all-languages /var/www/html
+RUN cp /var/www/html/config.sample.inc.php /var/www/html/config.inc.php && sed -i 's/localhost/127.0.0.1/g' /var/www/html/config.inc.php
 
 EXPOSE 3306 80
